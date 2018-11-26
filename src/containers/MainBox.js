@@ -4,6 +4,24 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  state = {
+    pageDisplayed: null
+  }
+
+  respondToMenuSelection = (event) => {
+    console.log(event.target.id)
+    switch (event.target.id) {
+      case 'profile': this.setState({pageDisplayed: <Profile />})
+        break
+      case 'photo': this.setState({pageDisplayed: <Photos />})
+        break
+      case 'cocktail': this.setState({pageDisplayed: <Cocktails />})
+        break
+      case 'pokemon': this.setState({pageDisplayed: <Pokemon />})
+        break
+    }
+  }
+
 
   render() {
 
@@ -17,8 +35,8 @@ class MainBox extends React.Component {
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar onClickIcon={(event) => this.respondToMenuSelection(event)}/>
+        {this.state.pageDisplayed}
       </div>
     )
   }
